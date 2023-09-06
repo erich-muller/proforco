@@ -1,0 +1,34 @@
+Essa parte é responsável por:
+- abrir navegador e fazer o login
+- coletar planilha do link
+- criar um JSON com minhas aulan
+
+Modelo JSON:
+
+JSON = {"SEGUNDA" :  {
+                    "aluno1" : { 
+                            "hora" : "10:00",  
+                            "telefone_aluno" : "5531...", 
+                            "telefone_responsavel" : "5531..."}
+                    }
+                     "aluno2" : { ... 
+                }
+                "SEGUNDA FIXO" : {
+                       "aluno1" : { 
+                            "hora" : "10:00",  
+                            "telefone_aluno" : "5531...", 
+                            "telefone_responsavel" : "5531..."}
+                    }
+                     "aluno2" : { ... 
+                }
+                "TERCA" : {
+                        "aluno1" : { 
+                            "hora" : "10:00",  
+                            "telefone_aluno" : "5531...", 
+                            "telefone_responsavel" : "5531..."}
+                    }
+                     "aluno2" : { ... 
+                }
+                 "TERCA FIXO" : None,     // Planilha não existente
+                ...
+                }
