@@ -1,11 +1,28 @@
-import pandas as pd
+import openpyxl
 
-# Delimitadores
+
 path = 'C:/Users/Usuario/Documents/Erich/GitHub/proforco/leitor_planilhas'
-planilha = pd.read_excel(path+'/PAINEL DE AULAS.xlsx', sheet_name="FIXO SEGUNDA")
-colunas = list(planilha.columns)
-posX = [colunas.index(x) for x in colunas if x.startswith('ERICH')][0]
-colunas_usadas = colunas[posX:posX+3] 
-data = planilha[colunas_usadas]
-data = data.dropna()
-print(data)
+wb = openpyxl.load_workbook(path+'/PAINEL DE AULAS.xlsx', data_only=True)
+sheets = wb.sheetnames
+sheet = wb['FIXO SEGUNDA']
+for i in range(1,sheet.max_column+1):
+    celula = str(sheet.cell(1, i).value)
+    if celula.upper().startswith('ERICH'):
+        break
+
+
+cols = [i, i+2]
+linhas = []
+for j in range(2, sheet.max_row+1):
+    linha = [sheet.cell(j, cols[0]).value,
+            sheet.cell(j, cols[1]).value]
+    
+    if str(linha[0]).strip() == 'NAO TEVE AULA': break
+    elif linha[0] != None and linha[1] != None:
+        linha[1] = linha[1].isoformat()
+        linhas.append(linha)
+
+
+for p in linhas:
+    print(p)
+        
