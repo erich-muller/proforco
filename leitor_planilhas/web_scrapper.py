@@ -15,7 +15,7 @@ def wait_until_exists(word):
 # LINK DA PLANILHA
 link = "https://docs.google.com/spreadsheets/d/1WAUGezrlXr7-qec3uzMey76M_QQkcwZx/edit#gid=1126414855"
 
-helium.start_chrome(link)
+helium.start_firefox(link)
 wait_until_exists("Fazer login")
 write(login, into="E-mail ou telefone")
 press(ENTER)
