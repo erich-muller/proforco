@@ -1,28 +1,48 @@
+# COLETA OS DADOS DE UMA DETERMINADA PLANILHA
+# E RETORNA UMA LISTA DE DOIS ELEMENTOS SENDO O
+# PRIMEIRO O NOME DO ALUNO E O SEGUNDO O HORÁRIO
+ 
 import openpyxl
 
+caminho = 'C:/Users/Usuario/Documents/Erich/GitHub/proforco/leitor_planilhas/PAINEL DE AULAS.xlsx'
 
-path = 'C:/Users/Usuario/Documents/Erich/GitHub/proforco/leitor_planilhas'
-wb = openpyxl.load_workbook(path+'/PAINEL DE AULAS.xlsx', data_only=True)
-sheets = wb.sheetnames
-sheet = wb['FIXO SEGUNDA']
-for i in range(1,sheet.max_column+1):
-    celula = str(sheet.cell(1, i).value)
-    if celula.upper().startswith('ERICH'):
-        break
-
-
-cols = [i, i+2]
-linhas = []
-for j in range(2, sheet.max_row+1):
-    linha = [sheet.cell(j, cols[0]).value,
-            sheet.cell(j, cols[1]).value]
-    
-    if str(linha[0]).strip() == 'NAO TEVE AULA': break
-    elif linha[0] != None and linha[1] != None:
-        linha[1] = linha[1].isoformat()
-        linhas.append(linha)
-
-
-for p in linhas:
-    print(p)
+class Planilha():
+    def __init__(self, path:str) -> None:
+        self.path = path
+        self.wb = openpyxl.load_workbook(path, data_only=True)
+        self.sheetnames = self.wb.sheetnames
         
+        sheets = {}
+        for sheetname in self.sheetnames:
+            sheets[sheetname] = self.wb[sheetname]
+        self.sheets = sheets        
+    
+    def get_alunos(self, sheetname:str, professor:str='ERICH'):
+        sheet = self.wb[sheetname]
+
+        # ENCONTRAR O INTERVALO DE COLS DO PROFESSOR
+        for i in range(1,sheet.max_column+1):
+            celula = str(sheet.cell(1, i).value)
+            if celula.upper().startswith(professor.upper()):
+                break
+        cols = [i, i+2]
+        
+        # ENCONTRAR O INTERVALO DE LINHAS DO PROFESSOR
+        linhas = []
+        for j in range(2, sheet.max_row+1):
+            linha = [sheet.cell(j, cols[0]).value,
+                    sheet.cell(j, cols[1]).value]
+            if str(linha[0]).strip() == 'NAO TEVE AULA': break
+            elif linha[0] != None and linha[1] != None:
+                
+                # VERIFICAR SE SÃO DUAS AULAS CONSECUTIVAS
+                if sheet.cell(j+1, cols[0]).value != linha[0]:
+                    linha[0], linha[1] = linha[0].strip(), linha[1].isoformat()
+                    linhas.append(linha)
+        
+        return linhas
+
+
+teste = Planilha(caminho)
+alunos = teste.get_alunos('SEGUNDA')
+print(alunos)
