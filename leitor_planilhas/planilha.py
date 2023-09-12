@@ -4,7 +4,6 @@
  
 import openpyxl
 
-caminho = 'C:/Users/Usuario/Documents/Erich/GitHub/proforco/leitor_planilhas/PAINEL DE AULAS.xlsx'
 
 class Planilha():
     def __init__(self, path:str) -> None:
@@ -42,7 +41,3 @@ class Planilha():
         
         return linhas
 
-
-teste = Planilha(caminho)
-alunos = teste.get_alunos('SEGUNDA')
-print(alunos)

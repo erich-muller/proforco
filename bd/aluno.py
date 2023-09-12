@@ -1,8 +1,11 @@
 from flask_login import UserMixin
 
-from database_inject import insert, update
-from database_consult import request
-
+try:
+    from database_inject import insert, update
+    from database_consult import request
+except:
+    from bd.database_inject import insert, update
+    from bd.database_consult import request
 
 def registrar(nome, telefone_aluno, telefone_responsavel):
     try:
@@ -36,7 +39,3 @@ class Aluno(UserMixin):
         # Exemplo de uso: aluno.alterar({'cidades': '["Nova Friburgo", "Florestal", "Ouro Preto"]'})
         update('alunos', attrs, f'id = {self.id}')
 
-
-registrar('Marcos', '5522999407306', '5522996063008')
-erich = Aluno('Marcos')
-print(erich.dados)

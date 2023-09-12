@@ -1,4 +1,8 @@
-import connection_config as bd_connection
+try:
+    import connection_config as bd_connection
+except:
+    import bd.connection_config as bd_connection
+
 connection = bd_connection.createConnection()
 cursor = connection.cursor()
 
