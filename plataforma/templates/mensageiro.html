@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensageiro</title>
+</head>
+<body>
+    <h1>segunda-feira</h1>
+    <section id="mensageiro">
+        <section class="aluno">
+            <div>Nome do aluno</div>
+            <div>Horário</div>
+            <select name="" id="">
+                <option value="telefone_aluno">5531991</option>
+                <option value="telefone_responsavel">5531992</option>
+            </select>
+            <div><button>Enviar</button></div>
+        </section>
+
+
+        {% for aluno in alunos %}
+        <section class="aluno">
+            <div>{{ aluno }}</div>
+            <div>{{ alunos[aluno]["horario"] }}</div>
+            <select name="" id="">
+                <option value="telefone_aluno">{{ alunos[aluno]['telefone_aluno'] }}</option>
+                <option value="telefone_responsavel">{{ alunos[aluno]['telefone_responsavel'] }}</option>
+            </select>
+            <div><button>Enviar</button></div>
+        </section>
+        {% endfor %}
+    </section>
+</body>
+</html>

@@ -6,7 +6,7 @@ from flask import Flask, render_template, redirect, url_for, request
 
 
 app = Flask(__name__)
-# app.config.from_object('config')
+app.config.from_object('config')
 
 # login_manager = LoginManager()
 # login_manager.init_app(app)
@@ -24,8 +24,19 @@ app = Flask(__name__)
 
 
 # ------------------ PÁGINAS ----------------------
+alunos = {'erich': {'horario': '13:00', 'telefone_aluno': '5522999407306', 'telefone_responsavel': '5522996063008'}}
 
 @app.route("/")
 def home():
     return 'Olá mundo!'
     return render_template('home.html')
+
+
+@app.route("/mensageiro")
+def mensageiro():
+    # print(alunos)
+    return render_template('mensageiro.html', alunos=alunos)
+
+
+if __name__ == '__main__':
+    app.run()

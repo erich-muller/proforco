@@ -3,7 +3,7 @@ import bd.aluno
 
 dia = 'FIXO SEGUNDA'
 caminho = 'C:/Users/Usuario/Documents/Erich/GitHub/proforco/leitor_planilhas/PAINEL DE AULAS.xlsx'
-caminho = 'C:/Users/erich/Downloads/PAINEL DE AULAS.xlsx'
+# caminho = 'C:/Users/erich/Downloads/PAINEL DE AULAS.xlsx'
 teste = Planilha(caminho)
 dados = teste.get_alunos(dia)
 
