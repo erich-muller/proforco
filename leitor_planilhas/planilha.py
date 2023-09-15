@@ -8,16 +8,28 @@ import openpyxl
 class Planilha():
     def __init__(self, path:str) -> None:
         self.path = path
-        self.wb = openpyxl.load_workbook(path, data_only=True)
-        self.sheetnames = self.wb.sheetnames
-        
-        sheets = {}
-        for sheetname in self.sheetnames:
-            sheets[sheetname] = self.wb[sheetname]
-        self.sheets = sheets        
+        try:
+            self.wb = openpyxl.load_workbook(path, data_only=True)
+            self.sheetnames = self.wb.sheetnames
+            
+            sheets = {}
+            for sheetname in self.sheetnames:
+                sheets[sheetname] = self.wb[sheetname]
+            self.sheets = sheets  
+        except:
+            print('Não foi possível obter a planilha')
+            raise ImportError
     
     def get_alunos(self, sheetname:str, professor:str='ERICH'):
-        sheet = self.wb[sheetname]
+        try:
+            sheet = self.wb[sheetname]
+        except:
+            print(f'Página {sheetname} não lançada, tentando fixo.')
+            try: 
+                sheet = self.wb['FIXO '+sheetname]
+            except:
+                print('Não foi possível encontrar', 'FIXO '+sheetname)
+                raise ImportError
 
         # ENCONTRAR O INTERVALO DE COLS DO PROFESSOR
         for i in range(1,sheet.max_column+1):
