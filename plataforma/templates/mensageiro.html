@@ -27,7 +27,9 @@
                 <option value="telefone_aluno">{{ alunos[aluno]['telefone_aluno'] }}</option>
                 <option value="telefone_responsavel">{{ alunos[aluno]['telefone_responsavel'] }}</option>
             </select>
-            <div><button>Enviar</button></div>
+            <a target="_blank" href="{{ 'https://wa.me/'+alunos[aluno]['telefone_aluno']+'''?text=Olá! Aqui está o link da nossa aula de matemática de hoje, às ''' + alunos[aluno]['horario'] +'''. https://us06web.zoom.us/j/9090080090?pwd=d205OTMwdFl1R2hwN3ppcHdkQUhnUT09. Caso não possa fazer a aula, entre em contato com a direção com antecedência!''' }}">Enviar</a>
+            
+            <div><button>Enviar</button>
         </section>
         {% endfor %}
     </section>
